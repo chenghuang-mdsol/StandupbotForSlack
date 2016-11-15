@@ -1,0 +1,22 @@
+﻿@using Mvc.JQuery.DataTables
+@using StandupAggregation.Web.Controllers
+<script src="//code.jquery.com/jquery.min.js"></script>
+<script type="text/javascript" src="//cdn.datatables.net/1.10.0/js/jquery.dataTables.js"></script>
+<link rel="stylesheet" href="//cdn.datatables.net/1.10.0/css/jquery.dataTables.css"/>
+<!-- table tools (csv export etc) https://datatables.net/extensions/tabletools -->
+<script type="text/javascript" src="//cdn.datatables.net/tabletools/2.2.1/js/dataTables.tableTools.min.js"></script>
+<link rel="stylesheet" href="//cdn.datatables.net/tabletools/2.2.1/css/dataTables.tableTools.css"/>
+
+
+<link rel="stylesheet" href="//cdn.datatables.net/colvis/1.1.1/css/dataTables.colVis.css"/>
+<script type="text/javascript" src="//cdn.datatables.net/colvis/1.1.1/js/dataTables.colVis.min.js"></script>
+@{
+    var vm = Html.DataTableVm("table-id", (StandupController c) => c.GetAll(null));
+    vm.JsOptions.Add("bPaginate", 0);
+    vm.JsOptions.Add("iDisplayLength", int.MaxValue);
+    //vm.ColumnFilter = true;
+    //    vm.JsOptions.Add("fnCreatedRow", new Raw(@"function( nRow, aData, iDataIndex ) {
+    //        $(nRow).attr('data-id', aData[0]);
+    //    }"));
+}
+@Html.Partial("DataTable", vm);
